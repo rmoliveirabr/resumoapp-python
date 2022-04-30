@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block lateral_menu %}
+<aside>
+     <section>
+          <p class="header">
+              Bem-vindo, {{ user }}
+          </p>
+          <p class="header">ORDENAR RESUMOS</p>
+          <p class="option">
+             <a href="?order=date">
+                 <i class="fa fa-refresh"></i> Mais Recentes
+             </a>
+          </p>
+          <p class="option">
+             <a href="?order=views">
+                 <i class="fa fa-eye"></i> Mais Visualizados
+             </a>
+          </p>
+          <p class="option">
+             <a href="?order=rating">
+                 <i class="fa fa-comments-o"></i> Melhores Avaliações
+             </a>
+          </p>
+          <p class="header">Resumos</p>
+          <p class="option">
+            <a href="#">
+              <i class="fa fa-book"></i> Resumo 1
+            </a>
+          </p><p class="option">
+            <a href="#">
+              <i class="fa fa-book"></i> Resumo 2
+            </a>
+          </p>
+          <p class="header">Configurações de Conta</p>
+          <p class="option"><a href="{% url 'accounts:edit' %}">
+            <i class="fa fa-cog"></i> Editar Informações
+          </a></p>
+          <p class="option"><a href="{%  url 'accounts:edit_password' %}">
+            <i class="fa fa-lock"></i> Editar Senha
+          </a></p>
+      </section>
+  </aside>
+ {% endblock %}

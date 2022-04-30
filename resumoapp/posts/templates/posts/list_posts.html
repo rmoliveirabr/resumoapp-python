@@ -1,0 +1,64 @@
+{% extends "base_fechado.html" %}
+
+{% block content %}
+<div class="inner">
+    <h2>Lista de Resumos</h2>
+
+    <div class="well">
+        {% if posts %}
+        <table class="pure-table">
+            <thead>
+                <tr class="smaller">
+                  <th>Título</th>
+                  <th>Autor</th>
+                  <th>Escola / Ano / Período</th>
+                  <th>Matéria</th>
+                  <th>Assunto da Matéria</th>
+                  <th>Views</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                  {% for post in posts %}
+                  <tr class="smaller {% cycle '' 'pure-table-odd' %}">
+                    <td><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></td>
+                    <td>{{post.user}}</td>
+                    <td>{{post.group.small}} - {{post.year}}</td>
+                    <td>{{post.subject}}</td>
+                    <td>{{post.topic}}</td>
+                    <td>{{post.views}}</td>
+                    <td><a href="{% url 'posts:edit' post.slug %}" class="pure-button pure-button-primary button-small">Editar</a></td>
+                    <td><a href="{% url 'posts:delete' post.slug %}" onClick="return confirm('Tem certeza que quer apagar?');"
+                        class="pure-button button-error button-small">Apagar</a></td>
+                  </tr>
+                  {% endfor %}
+            </tbody>
+        </table>
+        <ul class="pagination pagination-centered">
+            {% if page_obj.has_previous %}
+            <li>
+                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">Anterior</a>
+            </li>
+            {% endif %}
+            {% for page in paginator.page_range %}
+            <li{% if page == page_obj.number %} class="active"{% endif %}>
+                <a href="?page={{ page }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">{{ page }}</a>
+            </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li>
+                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}" title="">Próxima</a>
+            </li>
+            {% endif %}
+        </ul>
+        <p>
+          <a href="{% url 'posts:add' %}" class="pure-button pure-button-primary">Adicionar</a>
+        </p>
+    </div>
+</div>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base_aberto.html' %}
+
+{% block content %}
+<div class="inner">
+    <h2>Informe os dados do resumo</h2>
+
+    <div class="well">
+      <form class="pure-form pure-form-stacked" method="POST" id="postForm" data-years-url="{% url 'posts:ajax_load_years' %}"
+        data-topics-url="{% url 'posts:ajax_load_topics' %}">
+          {% csrf_token %}
+          <fieldset>
+              {{ form.non_field_errors }}
+
+              {% for field in form %}
+              <div class="pure-control-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+              </div>
+              {% endfor %}
+
+              <div class="pure-controls">
+                  <button type="submit" class="pure-button pure-button-primary">Gravar</button>
+                  <a href="{% url 'posts:list' %}" class="pure-button pure-button-primary">Voltar</a>
+              </div>
+          </fieldset>
+      </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $("#id_group").change(function () {
+    var url = $("#postForm").attr("data-years-url");  // get the url of the `load_cities` view
+    var groupId = $(this).val();  // get the selected country ID from the HTML input
+
+    $.ajax({                       // initialize an AJAX request
+      url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        'group': groupId       // add the country id to the GET parameters
+      },
+      success: function (data) {   // `data` is the return of the `load_cities` view function
+        $("#id_year").html(data);  // replace the contents of the city input with the data that came from the server
+      }
+    });
+
+  });
+
+  $("#id_subject").change(function () {
+    var url = $("#postForm").attr("data-topics-url");  // get the url of the `load_cities` view
+    var subjectId = $(this).val();  // get the selected country ID from the HTML input
+
+    console.log('URL='+url)
+    console.log('subjectId='+subjectId)
+
+    $.ajax({                       // initialize an AJAX request
+      url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        'subject': subjectId       // add the country id to the GET parameters
+      },
+      success: function (data) {   // `data` is the return of the `load_cities` view function
+        $("#id_topic").html(data);  // replace the contents of the city input with the data that came from the server
+      }
+    });
+
+  });
+
+</script>
+{% endblock %}

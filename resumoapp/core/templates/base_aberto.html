@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block lateral_menu %}
+<aside>
+     <section>
+        {% if user.is_authenticated %}
+        <p class="header">
+           Bem-vindo, {{ user }}
+        </p>
+        {% endif %}
+        <p class="header">ORDENAR RESUMOS</p>
+        <p class="option">
+           <a href="?order=date">
+               <i class="fa fa-refresh"></i> Mais Recentes
+           </a>
+        </p>
+        <p class="option">
+           <a href="?order=views">
+               <i class="fa fa-eye"></i> Mais Visualizados
+           </a>
+        </p>
+        <p class="option">
+           <a href="?order=rating">
+               <i class="fa fa-comments-o"></i> Melhores Avaliações
+           </a>
+        </p>
+     </section>
+     <section>
+         <p class="header">FILTROS</p>
+         <div class="pure-g-r">
+           <form class="pure-form">
+               <fieldset>
+                  <div class="pure-u-1-3"><label for="tag-form" class="form-size">Tag</label></div>
+                  <div class="pure-u-2-3"><select id="tag-form" class="pure-input-1 form-size">
+                      <option>AL</option>
+                      <option>CA</option>
+                      <option>IL</option>
+                  </select></div>
+                  <div class="pure-u-1-3"><label for="group-form" class="form-size">Grupo</label></div>
+                  <div class="pure-u-2-3"><select id="group-form" class="pure-input-1 form-size">
+                      <option>AL</option>
+                      <option>CA</option>
+                      <option>IL</option>
+                  </select></div>
+                  <div class="pure-u-1-3"><label for="subject-form" class="form-size">Matéria</label></div>
+                  <div class="pure-u-2-3"><select id="subject-form" class="pure-input-1 form-size">
+                      <option>AL</option>
+                      <option>CA</option>
+                      <option>IL</option>
+                  </select></div>
+                  <div class="pure-u-1-3"><label for="topic-form" class="form-size">Assunto</label></div>
+                  <div class="pure-u-2-3"><select id="topic-form" class="pure-input-1 form-size">
+                      <option>AL</option>
+                      <option>CA</option>
+                      <option>IL</option>
+                  </select></div>
+                  <div class="pure-u-1-3"><label for="year-form" class="form-size">Ano</label></div>
+                  <div class="pure-u-2-3"><select id="year-form" class="pure-input-1 form-size">
+                      <option>AL</option>
+                      <option>CA</option>
+                      <option>IL</option>
+                  </select></div>
+                  <div class="pure-u-1-3"><label for="keyword-form" class="form-size">Palavra-chave</label></div>
+                  <div class="pure-u-2-3"><input type="text" id="keyword-form" class="pure-input-1 form-size" /></div>
+                  <div class="pure-u-1"><button type="submit" class="pure-button pure-button-primary">Filtrar</button></div>
+              </fieldset>
+           </form>
+         </div>
+     </div>
+ </aside>
+ {% endblock %}
