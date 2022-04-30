@@ -11,7 +11,7 @@ from .forms import PostForm
 class PostListView(ListView):
     model = Post
     template_name = 'posts/list_posts.html'
-    paginate_by = 2
+    paginate_by = 3
 
     context_object_name = 'posts'
 
